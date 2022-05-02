@@ -1,0 +1,73 @@
+﻿@using ForumProject.ViewModels.Post
+@model PostDetailsViewModel
+
+
+
+<h1>
+    @Model.Title
+    @if (Model.CanModify)
+    {
+        <a method="post" asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id" id="btnEditPost" title="Edit Post" class="btn btn-primary fa-regular fa-pen-to-square"></a>
+        <a method="post" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" id="btnDeletePost" title="Delete Post" class="btn btn-danger fa-regular fa-trash-can"></a>
+    }
+</h1>
+@if (Model.IsEdited)
+{
+    <p style="color: green;">The post was Edited.</p>
+}
+
+<p>Created by @Model.AuthorName</p>
+<p>on @Model.Created</p>
+
+<div>
+    @Model.Content
+</div>
+<hr>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="addCommentContainer">
+        @await Html.PartialAsync("~/Views/Comment/_AddComment.cshtml",
+    new ForumProject.ViewModels.Comment.CommentCreateViewModel(),
+    new ViewDataDictionary(ViewData)
+    {
+    {"postId", Model.Id}
+    })
+    </div>
+}
+else
+{
+    <p style="color: red;">You have to login to interact with this post</p>
+}
+
+<div class="list-group">
+    @if (Model.Comments.Any())
+    {
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="list-group-item">
+                <p>Commented by @comment.AuthorName</p>
+                <p>on @comment.Created</p>
+                <div>
+                    @comment.Content
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>No comments yet</h3>
+    }
+</div>
+
+@section Scripts{
+<script src="~/js/comment.js"></script>
+<script>
+    var urls =
+    {
+        updatePage: "@Url.Action("Details", "Post", new { id = Model.Id})"
+    };
+</script>
+}
+
+

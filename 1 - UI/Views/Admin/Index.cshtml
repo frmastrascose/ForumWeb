@@ -1,0 +1,33 @@
+﻿@model ForumProject.ViewModels.Admin.AdminIndexViewModel
+
+<h2>All Roles</h2>
+
+@if (Model.Roles.Any())
+{
+    <a class="btn btn-outline-success mb-3" style="width:auto;" asp-controller="Role" asp-action="Create">
+        Create Role
+    </a>
+
+    foreach (var role in Model.Roles)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-outline-primary">Delete</a>
+                    <a class="btn btn-outline-danger" asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id">
+                        Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h2>No roles yet!</h2>
+}
+

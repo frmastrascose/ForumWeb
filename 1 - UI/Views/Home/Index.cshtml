@@ -1,0 +1,25 @@
+﻿@model ForumProject.ViewModels.HomeIndexViewModel
+
+<h2>Posts</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-controller="Post" asp-action="Create" class="btn btn-success">Create a new post</a>
+}
+<div id="PostsGroup" class="list-group">
+    @if (@Model.Posts.Any())
+    {
+        @foreach (var post in Model.Posts)
+        {
+            <a class="list-group-item list-group-item-action" asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                <h2 style="color:cornflowerblue;">@post.Title</h2>
+                <p>Posted by @post.AuthorName on @post.Created</p>
+                <p>@post.CommentsCount comments</p>
+            </a>
+        }
+    }
+    else
+    {
+        <h2>There are no posts yet!</h2>
+    }
+</div>
+
