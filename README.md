@@ -1,7 +1,7 @@
 # Forum Web Core 
 Web App created using ASP.NET Core MVC for the challenge for FullStack Developer
 
-##Instructions
+#Instructions
 * Checkou the project from Git
 * Create a empty database named ForumWeb in your localDb in SQL SERVER
 * Do a restore of the packages in the solutions and build the solution
