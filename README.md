@@ -15,8 +15,7 @@ The topic of project is discussion forum.
 
 Implemented:
 * Adding posts, comments
-* Moderating posts - Users with specific roles(admin, moderator) can delete, edit posts
-* User registration
+* User Register
 * User Login
 
 DDD architecture:
